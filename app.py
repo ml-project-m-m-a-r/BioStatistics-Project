@@ -48,10 +48,10 @@ def form():
         return render_template('form.html',res=z, note=l)
     elif y==1:
         z="It appears that you might have a cardiovascular disease"
-        l="Note: this statistics are not fully accurate, Please visit a doctor to check"
+        l="Note: this statistics are not fully accurate, Please visit a doctor to check."
         return render_template('form.html',res=z,note=l)
     else:
-        z="The Result Will Appear Here"
+        z="The Result Will Appear Here.."
         return render_template('form.html',res=z)
      
 

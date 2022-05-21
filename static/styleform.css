@@ -99,6 +99,11 @@ html {
   transition: all 0.4s ease;
 }
 
+
+.button {
+    background-color: #474444;
+}
+
 .form-content h3 {
     color: #fff;
     text-align: left;
@@ -143,7 +148,7 @@ html {
 
 
 .btn-primary{
-    background-color: #e0e7ee;
+    background-color: #8D8D8D;
     outline: none;
     border: 0px;
      box-shadow: none;
