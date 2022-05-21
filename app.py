@@ -8,15 +8,6 @@ from flask import Flask, render_template
 from pip import main
 
 data=[]
-y=None
-
-def preProcess(x): 
-    x["active"]=x["active"].replace("inactive", 0)
-    x["active"]=x["active"].replace("active", 1) 
-    # depends on data from Front
-    return x
-
-
 def load(x):
     model = pickle.load(open("trainedModel.sav",'rb')) 
     y=model.predict(np.array(x).reshape(1,-1))[0]
@@ -24,13 +15,16 @@ def load(x):
 
 app= Flask(__name__)
 
-
+@app.route('/')
+@app.route('/home')
+def index():
+    return render_template("index.html")
 
 
 @app.route('/form',  methods=['GET','POST'])
 def form():
     print(request.form)
-
+    y=None
     if request.form.get('age')!= None:
         data.clear()
         data.append(int(float(request.form.get('age'))*12*30))
@@ -48,49 +42,18 @@ def form():
         print(data)
         print(y)
     
-    #if y:
-        
-    
-    return render_template('form.html')
+    if y == 0:
+        z="You don't have a cardiovascular disease!"
+        l="Note: this statistics are not fully accurate, Please visit a doctor if something is wrong."
+        return render_template('form.html',res=z, note=l)
+    elif y==1:
+        z="It appears that you might have a cardiovascular disease"
+        l="Note: this statistics are not fully accurate, Please visit a doctor to check"
+        return render_template('form.html',res=z,note=l)
+    else:
+        z="The Result Will Appear Here"
+        return render_template('form.html',res=z)
      
-
-    # if request.form.get('age')!= None:
-    #     data.clear()
-    #     data.append(int(request.form.get('age')))
-    #     data.append(int(request.form.get('height')))
-    #     data.append(int(request.form.get('weight')))
-    #     data.append(int(request.form.get('gender')))
-    #     data.append(int(request.form.get('systolic')))
-    #     data.append(int(request.form.get('diastolic')))
-    #     data.append(int(request.form.get('cholesterol')))
-    #     data.append(int(request.form.get('glucose')))
-    #     data.append(int(request.form.get('smoking')))
-    #     data.append(int(request.form.get('alcoholIntake')))
-    #     data.append(int(request.form.get('physicalActivity')))
-    #     y= load(data)
-    #     print(y)
-    # return render_template('form.html')
-    
-    
-    
-    
-
-@app.route('/')
-@app.route('/home')
-def index():
-    return render_template("index.html")
-
-@app.route('/predict', methods=['GET','POST'])
-
-def predict():
-    if request=="POST":
-        f= request.files("/file")
-        x= preProcess(f)
-        ####
-        out =load(x)
-        return out
-    return None
-
 
 if __name__ == "__main__":
     app.run(debug=True)
