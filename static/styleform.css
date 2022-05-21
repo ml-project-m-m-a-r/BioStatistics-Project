@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
 
+html {
+    height: 100%;
+    margin: auto;
+    width: 960px;
+  }
+
 *, body {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
@@ -13,7 +19,6 @@ html, body {
     background-image: url("static\assets\images\img213.jpg");
     /*background-repeat: no-repeat;*/
     background-color: #cccccc;
-    overflow: hidden;
 }
 
 

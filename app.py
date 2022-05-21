@@ -1,4 +1,3 @@
-from crypt import methods
 from dataclasses import replace
 from turtle import home
 from webbrowser import get
@@ -7,7 +6,7 @@ import pickle
 import numpy as np
 from flask import Flask, render_template
 from pip import main
-
+data=[]
 
 def preProcess(x): 
     x["active"]=x["active"].replace("inactive", 0)
@@ -23,17 +22,33 @@ def load(x):
 
 app= Flask(__name__)
 
-@app.route('/')
-@app.route('/home')
-def index():
-   return render_template('index.html')
 
-@app.route('/form')
+
+
+@app.route('/form',  methods=['GET','POST'])
 def form():
+    data=[]
+    #if request.form.get('age')!= None:
+    data.append(int(request.form.get('age')))
+    data.append(int(request.form.get('height')))
+    data.append(int(request.form.get('weight')))
+    data.append(int(request.form.get('gender')))
+    data.append(int(request.form.get('systolic')))
+    data.append(int(request.form.get('diastolic')))
+    data.append(int(request.form.get('cholesterol')))
+    data.append(int(request.form.get('glucose')))
+    data.append(int(request.form.get('smoking')))
+    data.append(int(request.form.get('alcoholIntake')))
+    data.append(int(request.form.get('physicalActivity')))
+    y= load(data)
+    print(y)
+    
+    
+    
     return render_template('form.html')
 
-
-@app.route('/', methods=['GET'])
+@app.route('/')
+@app.route('/home')
 def index():
     return render_template("index.html")
 
