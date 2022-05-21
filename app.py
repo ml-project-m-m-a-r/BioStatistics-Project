@@ -28,20 +28,20 @@ app= Flask(__name__)
 @app.route('/form',  methods=['GET','POST'])
 def form():
     data=[]
-    #if request.form.get('age')!= None:
-    data.append(int(request.form.get('age')))
-    data.append(int(request.form.get('height')))
-    data.append(int(request.form.get('weight')))
-    data.append(int(request.form.get('gender')))
-    data.append(int(request.form.get('systolic')))
-    data.append(int(request.form.get('diastolic')))
-    data.append(int(request.form.get('cholesterol')))
-    data.append(int(request.form.get('glucose')))
-    data.append(int(request.form.get('smoking')))
-    data.append(int(request.form.get('alcoholIntake')))
-    data.append(int(request.form.get('physicalActivity')))
-    y= load(data)
-    print(y)
+    if request.form.get('age')!= None:
+        data.append(int(request.form.get('age')))
+        data.append(int(request.form.get('height')))
+        data.append(int(request.form.get('weight')))
+        data.append(int(request.form.get('gender')))
+        data.append(int(request.form.get('systolic')))
+        data.append(int(request.form.get('diastolic')))
+        data.append(int(request.form.get('cholesterol')))
+        data.append(int(request.form.get('glucose')))
+        data.append(int(request.form.get('smoking')))
+        data.append(int(request.form.get('alcoholIntake')))
+        data.append(int(request.form.get('physicalActivity')))
+        y= load(data)
+        print(y)
     
     
     
