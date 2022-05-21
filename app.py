@@ -5,6 +5,8 @@ from webbrowser import get
 from flask import Flask, render_template,url_for, request
 import pickle
 import numpy as np
+from flask import Flask, render_template
+from pip import main
 
 
 def preProcess(x): 
@@ -20,6 +22,16 @@ def load(x):
     return y
 
 app= Flask(__name__)
+
+@app.route('/')
+@app.route('/home')
+def index():
+   return render_template('index.html')
+
+@app.route('/form')
+def form():
+    return render_template('form.html')
+
 
 @app.route('/', methods=['GET'])
 def index():
