@@ -48,7 +48,7 @@ def form():
         print(data)
         print(y)
     
-    if y:
+    #if y:
         
     
     return render_template('form.html')
